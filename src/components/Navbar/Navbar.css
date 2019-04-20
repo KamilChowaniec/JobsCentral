@@ -1,0 +1,48 @@
+@import '~antd/dist/antd.css';
+.Navbar {
+    background: #7289D9;
+    width: 100wh;
+}
+
+.NavButton {
+    width: 18vw;
+    color: white;
+    border: none;
+    font-size: 1.5em;
+    font-weight: 500;
+    box-shadow: 1px 1px 6px -1px black;
+    transition: ease 200ms;
+    cursor: pointer;
+}
+
+.NavButton:focus {
+    outline: none;
+}
+
+.NavButton:hover {
+    box-shadow: 1px 1px 6px -1px rgb(0, 174, 255);
+    transition: ease 200ms;
+}
+
+.NavButton:active {
+    box-shadow: 1px 1px 6px -1px rgb(0, 174, 255), inset 0 0 3px rgb(0, 174, 255);
+    transform: scale(0.99);
+    transition: ease 100ms;
+}
+
+.NavButton.Dark {
+    background: #1E2A5D;
+}
+
+.NavButton.Light {
+    background: #4E65C3;
+}
+
+.NavInput{
+    background:transparent;
+    border:none;
+    border-bottom:3px solid rgb(216, 216, 216);
+    border-radius:0px;
+    font-size:1em;
+    color:white;
+}
