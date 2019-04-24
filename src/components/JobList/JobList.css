@@ -1,0 +1,44 @@
+@import '~antd/dist/antd.css';
+.JobList {
+    width: 80%;
+    box-shadow: 0px 3px 15px 2px rgba(0, 0, 0, 0.521);
+}
+
+.JobListJob {
+    position:relative;
+    width: 100%;
+    overflow: hidden;
+    transition-property: transform width box-shadow;
+    transition-duration: 500ms ;
+    transition-timing-function: ease-in-out;
+    z-index: 0;
+}
+
+.JobListJob.Clicked {
+    z-index: 2;
+    box-shadow: 0px 0px 3px 0px rgba(255, 255, 255, 0.342);
+    transform: translate(-8%, 0%);
+    width: 120%;
+}
+
+.JobListJob.Leaving {
+    z-index: 1;
+}
+
+.example-enter {
+    height: 0%;
+}
+
+.example-enter.example-enter-active {
+    height: auto;
+    transition: height 500ms ease-in;
+}
+
+.example-exit {
+    height: auto;
+}
+
+.example-exit.example-exit-active {
+    height: 0%;
+    transition: height 300ms ease-in;
+}

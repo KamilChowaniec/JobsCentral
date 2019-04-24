@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Input } from 'antd';
+import { Row, Col } from 'antd';
 //import { Default, Tablet, Mobile, Desktop } from '../Responsive/Responsive';
 import Logo from '../Logo/Logo';
 import './Navbar.css';
@@ -15,6 +15,8 @@ class Navbar extends Component {
     handleTagChange = evt => this.setState({ tags: evt.target.value })
     handleCityChange = evt => this.setState({ city: evt.target.value });
     handleSearch = () => this.props.onSearch(this.state.tags, this.state.city);
+    handleLogin = () => this.props.onLogin();
+    handleRegister = () => this.props.onRegister();
 
     render() {
         return (
@@ -25,10 +27,10 @@ class Navbar extends Component {
                 <Col span={12}>
                     <Row type='flex' justify='space-around' gutter={8}>
                         <Col span={11}>
-                            <Input className='NavInput' placeholder='Tagi: (np. stanowisko,firma)' onChange={this.handleTagChange} />
+                            <input type='text' className='NavInput' placeholder='Tagi: (np. stanowisko, firma)' onChange={this.handleTagChange} />
                         </Col>
                         <Col span={11}>
-                            <Input className='NavInput' placeholder='Miasto lub województwo' onChange={this.handleCityChange} />
+                            <input type='text' className='NavInput' placeholder='Miasto lub województwo' onChange={this.handleCityChange} />
                         </Col>
                     </Row>
                     <RowDivider height='0.5em' />
@@ -38,11 +40,11 @@ class Navbar extends Component {
                 </Col>
                 <Col span={6}>
                     <Row type='flex' justify='center'>
-                        <button className='NavButton Light'>Zaloguj</button>
+                        <button className='NavButton Light' onClick={this.handleLogin}>Zaloguj</button>
                     </Row>
                     <RowDivider height='0.5em' />
                     <Row type='flex' justify='center'>
-                        <button className='NavButton Dark'>Zarejestruj</button>
+                        <button className='NavButton Dark' onClick={this.handleRegister}>Zarejestruj</button>
                     </Row>
                 </Col>
             </Row>
