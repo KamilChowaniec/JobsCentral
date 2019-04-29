@@ -3,6 +3,9 @@ import { Row, Col } from 'antd';
 import Job from '../Job/Job';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './JobList.css'
+import AnimateHeight from 'react-animate-height';
+
+
 
 class JobList extends Component {
     state = {
@@ -20,7 +23,7 @@ class JobList extends Component {
                 },
                 state: {
                     clicked: false,
-                    leaving: false
+                    collapsed: false
                 }
             },
             {
@@ -37,7 +40,7 @@ class JobList extends Component {
                 },
                 state: {
                     clicked: false,
-                    leaving: false
+                    collapsed: false
                 }
             },
             {
@@ -53,7 +56,7 @@ class JobList extends Component {
                 },
                 state: {
                     clicked: false,
-                    leaving: false
+                    collapsed: false
                 }
             },
             {
@@ -69,7 +72,7 @@ class JobList extends Component {
                 },
                 state: {
                     clicked: false,
-                    leaving: false
+                    collapsed: false
                 }
             },
         ],
@@ -100,28 +103,42 @@ class JobList extends Component {
         this.setState({ items: newItems });
     }
 
+    componentWillReceiveProps(nextProps) {
+        let jobs = [...this.state.jobs];
+        for (let j of jobs) {
+            if (!j.info.city.toLowerCase().includes(nextProps.query.city.toLowerCase())) {
+                j.state.collapsed = true;
+                j.state.clicked = false;
+            }
+            else j.state.collapsed = false;
+        }
+        console.log(jobs);
+        this.setState({ jobs });
+    }
+
     render() {
         const items = this.state.items.map((item, i) => (
             <div className='Jes' key={item} onClick={() => this.handleRemove(i)} style={{ width: '100px', background: 'blue' }}>
                 {item}
             </div>
         ));
-
-        const jobs = this.state.jobs.map((el, ind) => (
-            <div key={el.info.id} className={el.state.clicked ? 'JobListJob Clicked' : el.state.leaving ? 'JobListJob Leaving' : 'JobListJob'}>
-                <Job bg={ind % 2 ? '#36393E' : '#303136'} {...el.info} clicked={el.state.clicked} onClick={() => this.handleJobClick(ind)} />
-            </div>
-        ));
+        let jobs = [];
+        let j = 0;
+        for (let i = 0; i < this.state.jobs.length; i++) {
+            let el = this.state.jobs[i];
+            if (!el.state.collapsed) j++;
+            jobs.push(<div key={el.info.id} className={el.state.clicked ? 'JobListJob Clicked' : 'JobListJob'}>
+                <AnimateHeight height={el.state.collapsed ? 0 : 'auto'} duration={500} easing='ease-in-out'>
+                    <Job bg={j % 2 ? '#36393E' : '#303136'} {...el.info} clicked={el.state.clicked} onClick={() => this.handleJobClick(i)} />
+                </AnimateHeight>
+            </div>);
+        }
         return (
             <Row type='flex' justify='center'>
                 <div className='JobList'>
 
                     {jobs}
                 </div>
-                {/* <div>
-                    <button onClick={this.handleAdd}>Add Item</button>
-                        {items}
-                </div> */}
             </Row>
         );
     }

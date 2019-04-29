@@ -17,6 +17,7 @@ class Navbar extends Component {
     handleSearch = () => this.props.onSearch(this.state.tags, this.state.city);
     handleLogin = () => this.props.onLogin();
     handleRegister = () => this.props.onRegister();
+    handleEnter = evt=> {if(evt.keyCode===13) this.sButton.click();}
 
     render() {
         return (
@@ -27,15 +28,15 @@ class Navbar extends Component {
                 <Col span={12}>
                     <Row type='flex' justify='space-around' gutter={8}>
                         <Col span={11}>
-                            <input type='text' className='NavInput' placeholder='Tagi: (np. stanowisko, firma)' onChange={this.handleTagChange} />
+                            <input type='text' className='NavInput' placeholder='Tagi: (np. stanowisko, firma)' onChange={this.handleTagChange} onKeyUp={this.handleEnter}/>
                         </Col>
                         <Col span={11}>
-                            <input type='text' className='NavInput' placeholder='Miasto lub województwo' onChange={this.handleCityChange} />
+                            <input type='text' className='NavInput' placeholder='Miasto lub województwo' onChange={this.handleCityChange} onKeyUp={this.handleEnter}/>
                         </Col>
                     </Row>
                     <RowDivider height='0.5em' />
                     <Row type='flex' justify='center'>
-                        <button className='NavButton Dark' onClick={this.handleSearch}>Szukaj</button>
+                        <button ref={button => this.sButton = button} className='NavButton Dark' onClick={this.handleSearch}>Szukaj</button>
                     </Row>
                 </Col>
                 <Col span={6}>
