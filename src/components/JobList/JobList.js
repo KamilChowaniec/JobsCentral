@@ -117,11 +117,6 @@ class JobList extends Component {
     }
 
     render() {
-        const items = this.state.items.map((item, i) => (
-            <div className='Jes' key={item} onClick={() => this.handleRemove(i)} style={{ width: '100px', background: 'blue' }}>
-                {item}
-            </div>
-        ));
         let jobs = [];
         let j = 0;
         for (let i = 0; i < this.state.jobs.length; i++) {

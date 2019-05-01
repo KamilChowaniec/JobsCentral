@@ -16,7 +16,6 @@
     color:white;
     font-size:1.5em;
     font-weight:bold;
-    white-space:nowrap;
 }
 
 .JobFirm{
@@ -80,6 +79,7 @@
 }
 
 .JobDescription{
+    text-align:center;
     color:#9e9e9e;
     font-size:0em;
     font-weight:bold;

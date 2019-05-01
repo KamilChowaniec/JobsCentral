@@ -22,14 +22,16 @@ class Job extends Component {
                         </Col>
                         <Col span={16}>
                             <div>
-                                <div className='JobTitle'>{title}</div>
-                                <div className='JobFirm'>{firm}</div>
-                                <div className={clicked ? 'JobDivider Clicked' : 'JobDivider'}></div>
-                                <div className={clicked ? 'JobDetailsClicked' : 'JobDetailsClicked Not'}>
-                                    <div className='JobDetails'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gdzie:&nbsp;{city}</div>
-                                    <div className='JobDetails'>&nbsp;&nbsp;&nbsp;&nbsp;Stanowisko:&nbsp;{position}</div>
-                                    <div className='JobDetails'>Wymiar&nbsp;pracy:&nbsp;{dimensions}</div>
-                                </div>
+                                <Row className='JobTitle'>{title}</Row>
+                                <Row className='JobFirm'>{firm}</Row>
+                                <Row className={clicked ? 'JobDivider Clicked' : 'JobDivider'}></Row>
+                                <Row className={clicked ? 'JobDetailsClicked' : 'JobDetailsClicked Not'} type='flex' justify='center' >
+                                <Col>
+                                    <Row className='JobDetails'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Gdzie:&nbsp;{city}</Row>
+                                    <Row className='JobDetails'>&nbsp;&nbsp;&nbsp;&nbsp;Stanowisko:&nbsp;{position}</Row>
+                                    <Row className='JobDetails'>Wymiar&nbsp;pracy:&nbsp;{dimensions}</Row>
+                                </Col>
+                                </Row>
                             </div>
                         </Col>
                 </Col>
