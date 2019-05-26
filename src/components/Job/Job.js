@@ -12,7 +12,7 @@ class Job extends Component {
     }
 
     render() {
-        let { bg, title, logo, position, firm, city, dimensions, description, clicked, onClick } = this.props;
+        let { bg, title, logo, position, firm, city, dimensions, description, clicked } = this.props;
 
         return (
             <Row className='Job' type='flex' align='middle' justify='space-between' gutter={16} style={{ background: bg, position: 'relative' }}>
@@ -22,7 +22,7 @@ class Job extends Component {
                         </Col>
                         <Col span={16}>
                             <div>
-                                <Row className='JobTitle'>{title}</Row>
+                                <Row className='JobTitle' ><span onClick={this.handleClick}>{title}</span></Row>
                                 <Row className='JobFirm'>{firm}</Row>
                                 <Row className={clicked ? 'JobDivider Clicked' : 'JobDivider'}></Row>
                                 <Row className={clicked ? 'JobDetailsClicked' : 'JobDetailsClicked Not'} type='flex' justify='center' >

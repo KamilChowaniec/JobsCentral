@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'antd';
+import { Row} from 'antd';
 import Job from '../Job/Job';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import './JobList.css'
 import AnimateHeight from 'react-animate-height';
 
@@ -131,7 +130,6 @@ class JobList extends Component {
         return (
             <Row type='flex' justify='center'>
                 <div className='JobList'>
-
                     {jobs}
                 </div>
             </Row>
