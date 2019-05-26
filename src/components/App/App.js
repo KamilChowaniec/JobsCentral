@@ -13,10 +13,10 @@ class App extends Component {
   }
 
   handleSearch = (tags, city) => this.setState({ searchTags: tags, searchCity: city });
-  handleLoginButton = () => this.setState({ modalVisible: true });
-  handleRegisterButton = () => this.setState({ modalVisible: true });
+  handleLoginButton = () => this.setState({ modalVisible: true, current: 'login' });
+  handleRegisterButton = () => this.setState({ modalVisible: true, current: 'register' });
   handleModalClose = () => this.setState({ modalVisible: false });
-  handleMenuChange = (e) => { this.setState({ current: e.key }); console.log(e) };
+  handleMenuChange = (e) => { this.setState({ current: e.key });};
 
   render() {
     return (<>
