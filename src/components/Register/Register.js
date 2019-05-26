@@ -10,7 +10,14 @@ class NormalRegisterForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                fetch("/api/users/signup", { method: 'POST', body: values })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.msg=='success'){
+                            //Zarejestrowalem sie najs zrob cos :D:DD:D:D
+                        }
+                    })
+                    .catch(err => { });
             }
         });
     };
@@ -42,12 +49,39 @@ class NormalRegisterForm extends Component {
         return (
             <Form onSubmit={this.handleSubmit} className="register-form">
                 <Form.Item>
-                    {getFieldDecorator('username', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
+                    {getFieldDecorator('firstName', {
+                        rules: [{ required: true, message: 'Musisz wpisać swoje imię!' }],
                     })(
                         <Input
                             prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                            placeholder="Nazwa użytkownika"
+                            placeholder="Imię"
+                        />,
+                    )}
+                </Form.Item>
+                <Form.Item>
+                    {getFieldDecorator('lastName', {
+                        rules: [{ required: true, message: 'Musisz wpisać swoje nazwisko!' }],
+                    })(
+                        <Input
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="Nazwisko"
+                        />,
+                    )}
+                </Form.Item>
+                <Form.Item hasFeedback>
+                    {getFieldDecorator('email', {
+                        rules: [{
+                            type: 'email',
+                            message: 'Email jest niepoprawny!',
+                        },
+                        {
+                            required: true,
+                            message: 'Musisz wpisać swój email!'
+                        }],
+                    })(
+                        <Input
+                            prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                            placeholder="Email"
                         />,
                     )}
                 </Form.Item>
@@ -68,7 +102,6 @@ class NormalRegisterForm extends Component {
                         placeholder="Hasło" />)}
 
                 </Form.Item>
-
                 <Form.Item hasFeedback>
                     {getFieldDecorator('confirm', {
                         rules: [

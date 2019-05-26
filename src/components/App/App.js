@@ -16,7 +16,7 @@ class App extends Component {
   handleLoginButton = () => this.setState({ modalVisible: true, current: 'login' });
   handleRegisterButton = () => this.setState({ modalVisible: true, current: 'register' });
   handleModalClose = () => this.setState({ modalVisible: false });
-  handleMenuChange = (e) => { this.setState({ current: e.key });};
+  handleMenuChange = (e) => this.setState({ current: e.key });
 
   render() {
     return (<>

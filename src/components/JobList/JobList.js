@@ -44,7 +44,6 @@ class JobList extends Component {
                 j.state.clicked = false;
             } else j.state.collapsed = false;
         }
-        console.log(jobs);
         this.setState({ jobs });
     }
 
