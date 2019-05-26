@@ -49,7 +49,7 @@ class JobList extends Component {
   }
 
   componentDidMount() {
-    fetch("https://jobs-central.herokuapp.com/api/jobOffers")
+    fetch("/api/jobOffers")
       .then(res => res.json())
       .then(json => {
         this.setState({
@@ -63,7 +63,8 @@ class JobList extends Component {
             };
           })
         });
-      });
+      })
+      .catch(err => {});
   }
 
   render() {
