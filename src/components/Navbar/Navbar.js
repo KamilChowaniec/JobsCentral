@@ -19,6 +19,7 @@ class Navbar extends Component {
     handleRegister = () => this.props.onRegister();
     handleEnter = evt=> {if(evt.keyCode===13) this.sButton.click();}
     handleLogout = () => this.props.onLogout();
+    handleShowJobModal = () => this.props.onShowJobModal();
 
     render() {
         return (
@@ -45,7 +46,7 @@ class Navbar extends Component {
                         this.props.authed ?
                         <>
                             <Row type='flex' justify='center'>
-                                <button className='NavButton Light' onClick={this.handleAddJobOffer}>Dodaj ofertę</button>
+                                <button className='NavButton Light' onClick={this.handleShowJobModal}>Dodaj ofertę</button>
                             </Row>
                             <RowDivider height='0.5em' />
                             <Row type='flex' justify='center'>

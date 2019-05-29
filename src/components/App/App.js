@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "../Navbar/Navbar";
 import JobList from "../JobList/JobList";
+import AddJobOfferModal from "../AddJobOfferModal/AddJobOfferModal";
 import LoginRegisterModal from "./../LoginRegisterModal/LoginRegisterModal";
 import "./App.css";
 
@@ -10,7 +11,8 @@ class App extends Component {
     searchCity: "",
     modalVisible: false,
     current: "login",
-    authLevel: 0
+    authLevel: 0,
+    showJobModal: false
   };
   componentDidMount() {
     if (localStorage.getItem("token")) this.setState({ authLevel: 1 });
@@ -30,6 +32,12 @@ class App extends Component {
     this.setState({ authLevel: 0 });
     localStorage.removeItem("token");
   };
+  handleHideJobModal = () => {
+    this.setState({ showJobModal: false });
+  };
+  handleShowJobModal = () => {
+    this.setState({ showJobModal: true });
+  };
 
   render() {
     return (
@@ -42,12 +50,17 @@ class App extends Component {
           onLogin={this.handleLogin}
           onRegister={this.handleRegister}
         />
+        <AddJobOfferModal
+          visible={this.state.showJobModal}
+          onHide={this.handleHideJobModal}
+        />
         <Navbar
           onSearch={this.handleSearch}
           onLogin={this.handleLoginButton}
           onRegister={this.handleRegisterButton}
           onLogout={this.handleLogout}
           authed={this.state.authLevel}
+          onShowJobModal={this.handleShowJobModal}
         />
         <div style={{ height: "5px" }} />
         <JobList
