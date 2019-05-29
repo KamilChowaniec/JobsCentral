@@ -19,12 +19,9 @@ class NormalRegisterForm extends Component {
                         },
                         body: JSON.stringify(values)
                     })
-                    .then(res => res.json())
-                    .then(data => {
-                        if (data.msg == 'success') {
-                            //Zarejestrowalem sie najs zrob cos :D:DD:D:D
-                            this.props.onRegister();
-                        }
+                    .then(res => {
+                        if(res.status==201)this.props.onRegister(true);
+                        else this.props.onRegister(false);
                     })
                     .catch(err => { });
             }
