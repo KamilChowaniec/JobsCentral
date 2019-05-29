@@ -18,6 +18,7 @@ class Navbar extends Component {
     handleLogin = () => this.props.onLogin();
     handleRegister = () => this.props.onRegister();
     handleEnter = evt=> {if(evt.keyCode===13) this.sButton.click();}
+    handleLogout = () => this.props.onLogout();
 
     render() {
         return (
@@ -40,13 +41,28 @@ class Navbar extends Component {
                     </Row>
                 </Col>
                 <Col span={6}>
-                    <Row type='flex' justify='center'>
-                        <button className='NavButton Light' onClick={this.handleLogin}>Zaloguj</button>
-                    </Row>
-                    <RowDivider height='0.5em' />
-                    <Row type='flex' justify='center'>
-                        <button className='NavButton Dark' onClick={this.handleRegister}>Zarejestruj</button>
-                    </Row>
+                    {
+                        this.props.authed ?
+                        <>
+                            <Row type='flex' justify='center'>
+                                <button className='NavButton Light' onClick={this.handleAddJobOffer}>Dodaj ofertę</button>
+                            </Row>
+                            <RowDivider height='0.5em' />
+                            <Row type='flex' justify='center'>
+                                <button className='NavButton Dark' onClick={this.handleLogout}>Wyloguj</button>
+                            </Row>
+                        </>
+                        :
+                        <>
+                            <Row type='flex' justify='center'>
+                                <button className='NavButton Light' onClick={this.handleLogin}>Zaloguj</button>
+                            </Row>
+                            <RowDivider height='0.5em' />
+                            <Row type='flex' justify='center'>
+                                <button className='NavButton Dark' onClick={this.handleRegister}>Zarejestruj</button>
+                            </Row>
+                        </>
+                    }
                 </Col>
             </Row>
         );
