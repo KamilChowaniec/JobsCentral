@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col } from "antd";
 import arrow from "./Arrow.png";
+import redX from "./redX.png";
 import "./Job.css";
 
 class Job extends Component {
@@ -20,7 +21,8 @@ class Job extends Component {
       address,
       dimensions,
       description,
-      clicked
+      clicked,
+      removable
     } = this.props;
 
     return (
@@ -102,6 +104,14 @@ class Job extends Component {
           onClick={this.handleClick}
           style={{ position: "absolute", bottom: "10px", right: "13px" }}
         />
+        {removable?<img
+          className="RemoveButton"
+          src={redX}
+          alt=""
+          onClick={this.props.onRemove}
+          style={{ position: "absolute", top: "10px", right: "15px" }}
+        />:null}
+        
       </Row>
     );
   }

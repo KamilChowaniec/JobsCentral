@@ -10,11 +10,20 @@ class NormalRegisterForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                fetch("/api/users/signup", { method: 'POST', body: values })
+                fetch("/api/users/signup",
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json, text/plain, */*',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(values)
+                    })
                     .then(res => res.json())
                     .then(data => {
-                        if(data.msg=='success'){
+                        if (data.msg == 'success') {
                             //Zarejestrowalem sie najs zrob cos :D:DD:D:D
+                            this.props.onRegister();
                         }
                     })
                     .catch(err => { });

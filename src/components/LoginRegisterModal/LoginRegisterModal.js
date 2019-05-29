@@ -24,7 +24,7 @@ class LoginRegisterModal extends Component {
                             </Menu.Item>
                 </Menu>
                 <div style={{height:'10px'}}></div>
-                {this.props.current=='login'?<Login />:<Register />}
+                {this.props.current=='login'?<Login onLogin = {this.props.onLogin}/>:<Register onRegister = {this.props.onRegister} />}
 
             </Modal>
         );

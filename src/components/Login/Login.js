@@ -6,11 +6,21 @@ class NormalLoginForm extends Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                fetch("/api/users/login", { method: 'POST', body: values })
+                fetch("/api/users/login",
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json, text/plain, */*',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(values)
+                    })
                     .then(res => res.json())
                     .then(data => {
-                        if(!data.msg){
-                            //Zalogowalem sie najs zrob cos :D:D:D
+                        if (!data.msg) {
+                            //we tego tokena jakos i wjeb tam authLevel 0 - niezarejestreowanty, 1 - user, 2 - admin
+                            let authLevel = 0;
+                            this.props.onLogin(authLevel);
                         }
                     })
                     .catch(err => { });

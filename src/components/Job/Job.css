@@ -103,3 +103,8 @@
 .Arrow.Clicked{
     transform: rotateX(180deg);
 }
+
+.RemoveButton{
+    cursor: pointer;
+    width: 12px;
+}
