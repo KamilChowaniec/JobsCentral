@@ -32,9 +32,23 @@ class JobList extends Component {
       lastClicked = -1;
     }
     console.log(jobs[id].info._id)
+
+
+    // fetch("http://localhost:5000/costam", {
+    //     method: 'get',
+    //     headers: {
+    //       'Accept': 'application/json, text/plain, /',
+    //       'Content-Type': 'application/json',
+    //       "chujdodasdfsdfasdfasdfupy": "chujjj"
+    //     },
+    //   })
+
     fetch(`/api/jobOffers/${jobs[id].info._id}`, {
       method: "DELETE",
-      'x-auth-token': localStorage.getItem("token")
+      headers:{
+          'x-auth-token': localStorage.getItem("token")
+        }
+
     })
       .then(res => res.json())
       .then(data => (data.msg ? this.setState({ jobs, lastClicked }) : null));

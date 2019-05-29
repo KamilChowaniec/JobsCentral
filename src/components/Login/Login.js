@@ -1,6 +1,20 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button } from "antd";
 
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = decodeURIComponent(
+    atob(base64Url)
+      .split("")
+      .map(function(c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+  return JSON.parse(base64);
+}
+
+
 class NormalLoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
@@ -17,8 +31,9 @@ class NormalLoginForm extends Component {
           .then(res => res.json())
           .then(data => {
             if (!data.msg) {
-              //we tego tokena jakos i wjeb tam authLevel 0 - niezarejestreowanty, 1 - user, 2 - admin
               let authLevel = 1;
+              let i = parseJwt(data.token);
+              if (i.id==0) authLevel = 2;   
               this.props.onLogin(authLevel);
               console.log(data.token);
               localStorage.setItem("token", data.token);

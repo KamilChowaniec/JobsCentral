@@ -5,6 +5,19 @@ import AddJobOfferModal from "../AddJobOfferModal/AddJobOfferModal";
 import LoginRegisterModal from "./../LoginRegisterModal/LoginRegisterModal";
 import "./App.css";
 
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = decodeURIComponent(
+    atob(base64Url)
+      .split("")
+      .map(function(c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
+  return JSON.parse(base64);
+}
+
 class App extends Component {
   state = {
     searchTags: [],
@@ -14,8 +27,13 @@ class App extends Component {
     authLevel: 0,
     showJobModal: false
   };
+
   componentDidMount() {
-    if (localStorage.getItem("token")) this.setState({ authLevel: 1 });
+    if (localStorage.getItem("token")) {
+      let i = parseJwt(localStorage.getItem("token"));
+      if (i.id==0) this.setState({ authLevel: 2 });
+      else this.setState({ authLevel: 1 });
+    }
   }
 
   handleSearch = (tags, city) =>
