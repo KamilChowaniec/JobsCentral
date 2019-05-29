@@ -31,7 +31,6 @@ class JobList extends Component {
       jobs[id].state.clicked = false;
       lastClicked = -1;
     }
-    console.log(jobs[id].info._id)
     fetch(`/api/jobOffers/${jobs[id].info._id}`, {
       method: "DELETE",
       'x-auth-token': localStorage.getItem("token")
@@ -42,13 +41,24 @@ class JobList extends Component {
   };
 
   componentWillReceiveProps(nextProps) {
+      let tags = nextProps.query.tags.split(',');
     let jobs = [...this.state.jobs];
     for (let j of jobs) {
-      if (
-        !j.info.address.city
-          .toLowerCase()
-          .includes(nextProps.query.city.toLowerCase())
-      ) {
+        let TagMatch = false;
+        let CityMatch = true;
+        if (
+            !j.info.address.city
+              .toLowerCase()
+              .includes(nextProps.query.city.toLowerCase())
+          ) CityMatch = false;
+        let info = j.info;
+        for(let t of tags){
+            if(info.firm.toLowerCase().includes(t.toLowerCase()) || info.position.toLowerCase().includes(t.toLowerCase())){
+                TagMatch=true;
+                break;
+            }
+        }
+      if(!TagMatch || !CityMatch){
         j.state.collapsed = true;
         j.state.clicked = false;
       } else j.state.collapsed = false;
@@ -75,6 +85,7 @@ class JobList extends Component {
   }
 
   render() {
+      console.log(this.state.jobs)
     let jobs = [];
     let j = 0;
     for (let i = 0; i < this.state.jobs.length; i++) {

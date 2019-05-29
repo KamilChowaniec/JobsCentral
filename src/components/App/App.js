@@ -3,16 +3,19 @@ import Navbar from "../Navbar/Navbar";
 import JobList from "../JobList/JobList";
 import AddJobOfferModal from "../AddJobOfferModal/AddJobOfferModal";
 import LoginRegisterModal from "./../LoginRegisterModal/LoginRegisterModal";
+import {Modal} from 'antd';
 import "./App.css";
 
 class App extends Component {
   state = {
-    searchTags: [],
+    searchTags: '',
     searchCity: "",
     modalVisible: false,
     current: "login",
     authLevel: 0,
-    showJobModal: false
+    showJobModal: false,
+    msgModalV: false,
+    msg: ''
   };
   componentDidMount() {
     if (localStorage.getItem("token")) this.setState({ authLevel: 1 });
@@ -26,8 +29,13 @@ class App extends Component {
     this.setState({ modalVisible: true, current: "register" });
   handleModalClose = () => this.setState({ modalVisible: false });
   handleMenuChange = e => this.setState({ current: e.key });
-  handleLogin = authLevel => this.setState({ authLevel });
-  handleRegister = () => {};
+  handleLogin = (authLevel) => this.setState({ authLevel  });
+  handleRegister = (status) => {
+
+    this.setState({ modalVisible: false, msgModalV: true, msg: status ? "Rejestracja powiodła się, możesz się teraz zalogować!" : "Rejestracja nie powiodła się!" }
+
+    )
+  };
   handleLogout = () => {
     this.setState({ authLevel: 0 });
     localStorage.removeItem("token");
@@ -38,6 +46,8 @@ class App extends Component {
   handleShowJobModal = () => {
     this.setState({ showJobModal: true });
   };
+
+  handleMsgModalClose = () => this.setState({ msgModalV: false });
 
   render() {
     return (
@@ -67,7 +77,16 @@ class App extends Component {
           query={{ tags: this.state.searchTags, city: this.state.searchCity }}
           authed={this.state.authLevel}
         />
-        ;
+        <Modal
+          visible={this.state.msgModalV}
+          onCancel={this.handleMsgModalClose}
+          onOk={this.handleMsgModalClose}
+          maskClosable={true}
+          zIndex={1000}
+        >
+          {this.state.msg}
+
+        </Modal>
       </>
     );
   }
