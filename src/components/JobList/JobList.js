@@ -84,7 +84,7 @@ class JobList extends Component {
               collapsed: false,
               deleted: false
             }
-          }))
+          })).reverse()
         });
       })
       .catch(err => {});

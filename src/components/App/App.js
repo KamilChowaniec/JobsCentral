@@ -47,7 +47,7 @@ class App extends Component {
     this.setState({ modalVisible: true, current: "register" });
   handleModalClose = () => this.setState({ modalVisible: false });
   handleMenuChange = e => this.setState({ current: e.key });
-  handleLogin = (authLevel) => this.setState({ authLevel  });
+  handleLogin = (authLevel) => this.setState({ authLevel, modalVisible:false  });
   handleRegister = (status) => {
 
     this.setState({ modalVisible: false, msgModalV: true, msg: status ? "Rejestracja powiodła się, możesz się teraz zalogować!" : "Rejestracja nie powiodła się!" }
